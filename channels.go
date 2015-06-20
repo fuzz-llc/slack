@@ -1,7 +1,6 @@
 package slack
 
 import (
-	"errors"
 	"net/url"
 	"strconv"
 )
@@ -65,7 +64,7 @@ func channelRequest(path string, values url.Values, debug bool) (*channelRespons
 		return nil, err
 	}
 	if !response.Ok {
-		return nil, errors.New(response.Error)
+		return nil, NewSlackError(response.Error)
 	}
 	return response, nil
 }

@@ -1,7 +1,6 @@
 package slack
 
 import (
-	"errors"
 	"fmt"
 	"net/url"
 )
@@ -19,7 +18,7 @@ func adminRequest(method string, teamName string, values url.Values, debug bool)
 	}
 
 	if !adminResponse.OK {
-		return nil, errors.New(adminResponse.Error)
+		return nil, NewSlackError(adminResponse.Error)
 	}
 
 	return adminResponse, nil

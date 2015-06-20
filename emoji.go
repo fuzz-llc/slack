@@ -1,7 +1,6 @@
 package slack
 
 import (
-	"errors"
 	"net/url"
 )
 
@@ -21,7 +20,7 @@ func (api *Slack) GetEmoji() (map[string]string, error) {
 		return nil, err
 	}
 	if !response.Ok {
-		return nil, errors.New(response.Error)
+		return nil, NewSlackError(response.Error)
 	}
 	return response.Emoji, nil
 }

@@ -1,7 +1,6 @@
 package slack
 
 import (
-	"errors"
 	"net/url"
 	"strconv"
 	"strings"
@@ -123,7 +122,7 @@ func fileRequest(path string, values url.Values, debug bool) (*fileResponseFull,
 		return nil, err
 	}
 	if !response.Ok {
-		return nil, errors.New(response.Error)
+		return nil, NewSlackError(response.Error)
 	}
 	return response, nil
 }
@@ -211,7 +210,7 @@ func (api *Slack) UploadFile(params FileUploadParameters) (file *File, err error
 		return nil, err
 	}
 	if !response.Ok {
-		return nil, errors.New(response.Error)
+		return nil, NewSlackError(response.Error)
 	}
 	return &response.File, nil
 }

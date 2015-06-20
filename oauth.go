@@ -1,7 +1,6 @@
 package slack
 
 import (
-	"errors"
 	"net/url"
 )
 
@@ -25,7 +24,7 @@ func GetOAuthToken(clientId, clientSecret, code, redirectURI string, debug bool)
 		return "", "", err
 	}
 	if !response.Ok {
-		return "", "", errors.New(response.Error)
+		return "", "", NewSlackError(response.Error)
 	}
 	return response.AccessToken, response.Scope, nil
 }

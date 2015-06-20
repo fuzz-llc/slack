@@ -1,7 +1,6 @@
 package slack
 
 import (
-	"errors"
 	"net/url"
 )
 
@@ -53,7 +52,7 @@ func (api *Slack) AuthTest() (response *AuthTestResponse, error error) {
 		return nil, err
 	}
 	if !responseFull.Ok {
-		return nil, errors.New(responseFull.Error)
+		return nil, NewSlackError(responseFull.Error)
 	}
 	return &responseFull.AuthTestResponse, nil
 }
